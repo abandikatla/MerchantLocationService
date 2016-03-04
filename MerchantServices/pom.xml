@@ -12,6 +12,31 @@
     <maven.compiler.source>1.7</maven.compiler.source>
 	<maven.compiler.target>1.7</maven.compiler.target>
   </properties>
+<profiles>
+        <profile>
+            <id>server</id>
+            <build>
+                <defaultGoal>test</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <mainClass>com.geo.server.Server</mainClass>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+</profiles>
 
      <dependencies>
      	<dependency>
@@ -61,98 +86,4 @@
 			<version>0.11</version>
 		</dependency>
     </dependencies>
-    <build>
-		<sourceDirectory>src</sourceDirectory>
-			<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-			<!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>create-my-bundle</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <descriptorRefs>
-                                <descriptorRef>jar-with-dependencies</descriptorRef>
-                            </descriptorRefs>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin> -->
-            <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-shade-plugin</artifactId>
-            <version>1.7</version>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>shade</goal>
-                    </goals>
-                    <configuration>
-                        <!-- Optional Start -->
-                        <finalName>${artifactId}-${version}</finalName>
-                        <shadedArtifactAttached>true</shadedArtifactAttached>
-                        <shadedClassifierName>jar-with-dependencies</shadedClassifierName>
-                        <!-- Optional End -->
-
-                        <transformers>
-                            <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>net.indigital.ngali.NGALI</mainClass>
-                            </transformer>
-                            <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
-                                <resource>META-INF/cxf/cxf-extension-xml.xml</resource>
-                            </transformer>
-                            <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                                <resource>META-INF/cxf/bus-extensions.txt</resource>
-                            </transformer>
-
-                            <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
-                                <resource>META-INF/cxf/cxf-extension-http-jetty.xml</resource>
-                            </transformer>
-                            <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
-                                <resource>META-INF/cxf/cxf-extension-http.xml</resource>
-                            </transformer>
-                            <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
-                                <resource>META-INF/cxf/cxf-servlet.xml</resource>
-                            </transformer>
-                            <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
-                                <resource>META-INF/cxf/cxf.xml</resource>
-                            </transformer>
-
-                        </transformers>
-                        <filters>
-                            <filter>
-                                <artifact>*:*</artifact>
-                                <excludes>
-                                    <exclude>META-INF/*.SF</exclude>
-                                    <exclude>META-INF/*.DSA</exclude>
-                                    <exclude>META-INF/*.RSA</exclude>
-                                </excludes>
-                            </filter>
-                        </filters>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-		</plugins>
-	</build>
 </project>

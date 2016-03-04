@@ -25,8 +25,8 @@ public class LocationService {
 
 	@POST
 	@Path("/merchants/")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/json")
+	@Produces("application/json")
 	public ServiceResponse getMerchants(Query query) {
 
 		
