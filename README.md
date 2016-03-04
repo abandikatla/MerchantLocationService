@@ -8,6 +8,10 @@ jdk 7
 apache cxf
 maven
 
+Third Party APIs Used :
+http://www.geonames.org/
+This api provides pin codes in a range and also converts a location name to pin code.
+
 The merchants data is provided as a csv file. The location of the file is provided in src/main/resources/config.properties
 
 To compile : mvn install
