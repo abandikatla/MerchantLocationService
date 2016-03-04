@@ -10,7 +10,8 @@ maven
 
 The merchants data is provided as a csv file. The location of the file is provided in src/main/resources/config.properties
 
-To run : Run the Server class in this project which starts the server.
+To compile : mvn install
+To run : Run the Server class in this project which starts the server or use mvn -Pserver
 
 
 Example :
